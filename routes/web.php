@@ -4,6 +4,7 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Auth\LoginController;
 use App\Http\Controllers\Auth\RegisterController;
 use App\Http\Controllers\KelasController;
+use App\Http\Controllers\SiswaController;
 use Illuminate\Support\Facades\Auth;
 
 // Authentication
@@ -16,8 +17,12 @@ Route::get('/register', [RegisterController::class, 'showRegistrationForm'])->na
 Route::post('/register', [RegisterController::class, 'register'])->name('register.submit');
 
 
-// Route::get('/list-kelas', function () {
-//     return view('feature.list-kelas');
-// })->middleware('auth');
+Route::get('/list-kelas', [KelasController::class, 'showListKelas'])->middleware('auth')->name('list-kelas');
 
-Route::get('/list-kelas', [KelasController::class, 'showListKelas'])->middleware('auth');
+
+Route::middleware(['auth'])->group(function () {
+    Route::get('/siswa', [SiswaController::class, 'index'])->name('siswa');
+    Route::post('/siswa', [SiswaController::class, 'store'])->name('create-siswa.submit');
+    Route::put('/edit-siswa/{id}', [SiswaController::class, 'update'])->name('edit-siswa.submit');
+    Route::delete('/delete-siswa/{id}', [SiswaController::class, 'destroy'])->name('delete-siswa');
+});
