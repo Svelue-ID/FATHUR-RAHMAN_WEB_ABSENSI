@@ -20,6 +20,14 @@
                             <label for="nama_siswa" class="form-label">Nama Siswa</label>
                             <input type="text" class="form-control" id="nama_siswa" name="nama_siswa" required>
                         </div>
+                        <div class="mb-3">
+                            <label for="kelas" class="form-label">Pilih Kelas</label>
+                            <select class="form-control" id="kelas" name="kelas[]" multiple>
+                                @foreach ($kelas as $k)
+                                    <option value="{{ $k->id }}">{{ $k->nama_kelas }}</option>
+                                @endforeach
+                            </select>
+                        </div>
                     </div>
                     <div class="modal-footer">
                         <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Tutup</button>
@@ -45,6 +53,14 @@
                         <div class="mb-3">
                             <label for="edit_nama_siswa" class="form-label">Nama Siswa</label>
                             <input type="text" class="form-control" id="edit_nama_siswa" name="nama_siswa" required>
+                        </div>
+                        <div class="mb-3">
+                            <label for="edit_kelas" class="form-label">Pilih Kelas</label>
+                            <select class="form-control" id="edit_kelas" name="kelas[]" multiple>
+                                @foreach ($kelas as $k)
+                                    <option value="{{ $k->id }}">{{ $k->nama_kelas }}</option>
+                                @endforeach
+                            </select>
                         </div>
                     </div>
                     <div class="modal-footer">
