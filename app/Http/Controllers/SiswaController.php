@@ -4,6 +4,9 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\Siswa;
+use App\Models\Kelas;
+use App\Models\Kelas_Siswa;
+
 
 class SiswaController extends Controller
 {
@@ -13,7 +16,8 @@ class SiswaController extends Controller
     public function index()
     {
         $siswa = Siswa::all();
-        return view('feature.siswa.list-siswa')->with('siswa', $siswa);
+        $kelas = Kelas::all();
+        return view('feature.siswa.list-siswa')->with(['siswa', 'kelas'], [$siswa, $kelas]);
     }
 
     /**
@@ -30,10 +34,21 @@ class SiswaController extends Controller
     public function store(Request $request)
     {
         $validatedData = $request->validate([
-            'nama_siswa' => 'required|string|max:255'
+            'nama_siswa' => 'required|string|max:255',
+            'kelas' => 'array' // Validasi array kelas
         ]);
     
-        Siswa::create($validatedData);
+        $siswa = Siswa::create(['nama_siswa' => $validatedData['nama_siswa']]);
+    
+        // Simpan relasi kelas-siswa
+        if ($request->has('kelas')) {
+            foreach ($request->kelas as $kelas_id) {
+                Kelas_Siswa::create([
+                    'id_siswa' => $siswa->id,
+                    'id_kelas' => $kelas_id
+                ]);
+            }
+        }
     
         return redirect()->route('siswa')->with('success', 'Siswa berhasil ditambahkan!');
     }
@@ -60,13 +75,27 @@ class SiswaController extends Controller
     public function update(Request $request, string $id)
     {
         $validatedData = $request->validate([
-            'nama_siswa' => 'required|string|max:255'
+            'nama_siswa' => 'required|string|max:255',
+            'kelas' => 'array'
         ]);
     
         $siswa = Siswa::findOrFail($id);
-        $siswa->update($validatedData);
+        $siswa->update(['nama_siswa' => $validatedData['nama_siswa']]);
+    
+        // Hapus kelas lama dan masukkan yang baru
+        Kelas_Siswa::where('id_siswa', $id)->delete();
+    
+        if ($request->has('kelas')) {
+            foreach ($request->kelas as $kelas_id) {
+                Kelas_Siswa::create([
+                    'id_siswa' => $siswa->id,
+                    'id_kelas' => $kelas_id
+                ]);
+            }
+        }
     
         return redirect()->route('siswa')->with('success', 'Data siswa berhasil diperbarui!');
+    
     }
 
     /**
