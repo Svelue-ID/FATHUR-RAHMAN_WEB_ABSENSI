@@ -3,6 +3,7 @@
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Auth\LoginController;
 use App\Http\Controllers\Auth\RegisterController;
+use App\Http\Controllers\KelasController;
 use Illuminate\Support\Facades\Auth;
 
 // Authentication
@@ -15,6 +16,8 @@ Route::get('/register', [RegisterController::class, 'showRegistrationForm'])->na
 Route::post('/register', [RegisterController::class, 'register'])->name('register.submit');
 
 
-Route::get('/list-kelas', function () {
-    return view('feature.list-kelas');
-})->middleware('auth');
+// Route::get('/list-kelas', function () {
+//     return view('feature.list-kelas');
+// })->middleware('auth');
+
+Route::get('/list-kelas', [KelasController::class, 'showListKelas'])->middleware('auth');
