@@ -17,7 +17,10 @@ class SiswaController extends Controller
     {
         $siswa = Siswa::all();
         $kelas = Kelas::all();
-        return view('feature.siswa.list-siswa')->with(['siswa', 'kelas'], [$siswa, $kelas]);
+        return view('feature.siswa.list-siswa')->with([
+            'siswa' => $siswa,
+            'kelas' => $kelas
+        ]);
     }
 
     /**
@@ -37,9 +40,9 @@ class SiswaController extends Controller
             'nama_siswa' => 'required|string|max:255',
             'kelas' => 'array' // Validasi array kelas
         ]);
-    
+
         $siswa = Siswa::create(['nama_siswa' => $validatedData['nama_siswa']]);
-    
+
         // Simpan relasi kelas-siswa
         if ($request->has('kelas')) {
             foreach ($request->kelas as $kelas_id) {
@@ -49,7 +52,7 @@ class SiswaController extends Controller
                 ]);
             }
         }
-    
+
         return redirect()->route('siswa')->with('success', 'Siswa berhasil ditambahkan!');
     }
 
@@ -78,13 +81,13 @@ class SiswaController extends Controller
             'nama_siswa' => 'required|string|max:255',
             'kelas' => 'array'
         ]);
-    
+
         $siswa = Siswa::findOrFail($id);
         $siswa->update(['nama_siswa' => $validatedData['nama_siswa']]);
-    
+
         // Hapus kelas lama dan masukkan yang baru
         Kelas_Siswa::where('id_siswa', $id)->delete();
-    
+
         if ($request->has('kelas')) {
             foreach ($request->kelas as $kelas_id) {
                 Kelas_Siswa::create([
@@ -93,9 +96,9 @@ class SiswaController extends Controller
                 ]);
             }
         }
-    
+
         return redirect()->route('siswa')->with('success', 'Data siswa berhasil diperbarui!');
-    
+
     }
 
     /**
