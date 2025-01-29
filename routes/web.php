@@ -25,4 +25,6 @@ Route::middleware(['auth'])->group(function () {
     Route::post('/siswa', [SiswaController::class, 'store'])->name('create-siswa.submit');
     Route::put('/edit-siswa/{id}', [SiswaController::class, 'update'])->name('edit-siswa.submit');
     Route::delete('/delete-siswa/{id}', [SiswaController::class, 'destroy'])->name('delete-siswa');
+
+    Route::post('/tambah-kelas', [KelasController::class, 'addKelas'])->name('create-kelas');
 });
