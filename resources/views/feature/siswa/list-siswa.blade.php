@@ -24,7 +24,7 @@
                             <label for="kelas" class="form-label">Pilih Kelas</label>
                             <select class="form-control" id="kelas" name="kelas[]" multiple>
                                 @foreach ($kelas as $k)
-                                    <option value="{{ $k->id }}">{{ $k->nama_kelas }}</option>
+                                    <option value="{{ $k->id }}">{{ $k->kelas }}</option>
                                 @endforeach
                             </select>
                         </div>
@@ -58,7 +58,7 @@
                             <label for="edit_kelas" class="form-label">Pilih Kelas</label>
                             <select class="form-control" id="edit_kelas" name="kelas[]" multiple>
                                 @foreach ($kelas as $k)
-                                    <option value="{{ $k->id }}">{{ $k->nama_kelas }}</option>
+                                    <option value="{{ $k->id }}">{{ $k->kelas }}</option>
                                 @endforeach
                             </select>
                         </div>

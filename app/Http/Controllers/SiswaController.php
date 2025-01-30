@@ -17,6 +17,7 @@ class SiswaController extends Controller
     {
         $siswa = Siswa::all();
         $kelas = Kelas::all();
+        // return dd($kelas);
         return view('feature.siswa.list-siswa')->with([
             'siswa' => $siswa,
             'kelas' => $kelas
