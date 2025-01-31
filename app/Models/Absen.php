@@ -14,6 +14,7 @@ class Absen extends Model
     protected $fillable = [
         'id_siswa',
         'id_kelas',
+        'tanggal', 
         'keterangan_hadir',
         'dokumentasi_kehadiran'
     ];
@@ -23,9 +24,9 @@ class Absen extends Model
      *
      * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
      */
-    public function user(): BelongsTo
+    public function siswa(): BelongsTo
     {
-        return $this->belongsTo(User::class, 'id_siswa', 'id');
+        return $this->belongsTo(Siswa::class, 'id_siswa', 'id');
     }
 
     /**
