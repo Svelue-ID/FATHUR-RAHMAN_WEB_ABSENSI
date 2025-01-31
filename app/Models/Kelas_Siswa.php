@@ -21,9 +21,9 @@ class Kelas_Siswa extends Model
      *
      * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
      */
-    public function user(): BelongsTo
+    public function siswa(): BelongsTo
     {
-        return $this->belongsTo(User::class, 'id_siswa', 'id');
+        return $this->belongsTo(Siswa::class, 'id_siswa', 'id');
     }
 
     /**

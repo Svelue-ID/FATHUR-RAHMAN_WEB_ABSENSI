@@ -5,7 +5,6 @@
         Tambah Kelas
     </button>
 
-    {{-- Tmabah Modal --}}
     <div class="modal fade" id="tambahKelasModal" tabindex="-1" aria-labelledby="modalLabel" aria-hidden="true">
         <div class="modal-dialog">
             <div class="modal-content">
@@ -36,18 +35,20 @@
 
             <table class="table">
                 <thead>
-                    <tr>
+                    <tr class="text-center">
                         <th scope="col">No</th>
                         <th scope="col">Nama Kelas</th>
-                        <th scope="col">Action</th>
+                        <th scope="col">Akses Kelas</th>
+                        <th scope="col">Edit Kelas</th>
                     </tr>
                 </thead>
                 <tbody>
                     @foreach ($kelas as $kelas_siswa)
-                        <tr>
+                        <tr class="text-center">
                             <th scope="row">{{ $loop->iteration }}</th>
                             <td>{{ $kelas_siswa->kelas }}</td>
-                            <td><button type="button" class="btn btn-primary">Akses Kelas</button></td>
+                            <td><a href="{{ route('absen', $kelas_siswa->id) }}" type="button"
+                                    class="btn btn-primary">Akses</a></td>
                             <td><button type="button" class="btn btn-warning">Edit</button></td>
                         </tr>
                     @endforeach
@@ -76,3 +77,4 @@
             });
         });
     </script>
+@endpush

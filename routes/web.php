@@ -5,6 +5,7 @@ use App\Http\Controllers\Auth\LoginController;
 use App\Http\Controllers\Auth\RegisterController;
 use App\Http\Controllers\KelasController;
 use App\Http\Controllers\SiswaController;
+use App\Http\Controllers\AbsenController;
 use Illuminate\Support\Facades\Auth;
 
 // Authentication
@@ -27,4 +28,9 @@ Route::middleware(['auth'])->group(function () {
     Route::delete('/delete-siswa/{id}', [SiswaController::class, 'destroy'])->name('delete-siswa');
 
     Route::post('/tambah-kelas', [KelasController::class, 'addKelas'])->name('create-kelas');
+
+    Route::get('/absen/{kelas}', [AbsenController::class, 'listAbsen'])->name('absen');
+    Route::get('/absen/{kelas}/create', [AbsenController::class, 'showCreateForm'])->name('absen.create.form');
+    Route::post('/absen/{kelas}/create', [AbsenController::class, 'storeAbsen'])->name('absen.create');
+    Route::get('/get-siswa-by-kelas/{kelas}', [AbsenController::class, 'getSiswaByKelas']);
 });
