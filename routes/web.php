@@ -33,4 +33,6 @@ Route::middleware(['auth'])->group(function () {
     Route::get('/absen/{kelas}/create', [AbsenController::class, 'showCreateForm'])->name('absen.create.form');
     Route::post('/absen/{kelas}/create', [AbsenController::class, 'storeAbsen'])->name('absen.create');
     Route::get('/get-siswa-by-kelas/{kelas}', [AbsenController::class, 'getSiswaByKelas']);
+    Route::get('/absen/{kelas}/download/{tanggal}', [AbsenController::class, 'downloadAbsen'])
+    ->name('absen.download');
 });

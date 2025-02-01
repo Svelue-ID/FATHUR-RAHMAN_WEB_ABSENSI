@@ -37,6 +37,10 @@
                                             d="M8 5.5a2.5 2.5 0 1 0 0 5 2.5 2.5 0 0 0 0-5M4.5 8a3.5 3.5 0 1 1 7 0 3.5 3.5 0 0 1-7 0" />
                                     </svg>
                                 </a>
+                                <a href="{{ route('absen.download', ['kelas' => $kelas->id, 'tanggal' => $absen->tanggal]) }}"
+                                    class="btn btn-sm btn-success">
+                                    <i class="fas fa-download"></i> Download
+                                </a>
                             </td>
                         </tr>
                     @empty
