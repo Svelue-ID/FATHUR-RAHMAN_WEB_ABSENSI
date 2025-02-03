@@ -39,7 +39,6 @@
                         <th scope="col">No</th>
                         <th scope="col">Nama Kelas</th>
                         <th scope="col">Akses Kelas</th>
-                        <th scope="col">Edit Kelas</th>
                     </tr>
                 </thead>
                 <tbody>
@@ -49,7 +48,6 @@
                             <td>{{ $kelas_siswa->kelas }}</td>
                             <td><a href="{{ route('absen', $kelas_siswa->id) }}" type="button"
                                     class="btn btn-primary">Akses</a></td>
-                            <td><button type="button" class="btn btn-warning">Edit</button></td>
                         </tr>
                     @endforeach
                 </tbody>
